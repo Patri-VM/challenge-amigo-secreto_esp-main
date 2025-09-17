@@ -16,18 +16,43 @@ function agregarAmigo() {
 
     // guardar en el array
     listaNombresAmigos.push(nombreAmigo);
-
-    // mostrar en label
-    let lista = document.getElementById("listaAmigos");
-    let li = document.createElement("li");
-    li.textContent = nombreAmigo;
-    lista.appendChild(li);
     
+    // actualizar lista
+    actualizarAmigos();
     // limpiar imput
     limpiarCaja();
 
 }
 
+function actualizarAmigos(){
+    let lista = document.getElementById("listaAmigos");
+    lista.innerHTML = "";
+
+    for(let i=0;i<listaNombresAmigos.length;i++){
+        let li = document.createElement("li");
+        li.textContent = listaNombresAmigos[i];
+        lista.appendChild(li);
+    }
+}
+
 function limpiarCaja() {
     document.querySelector('#amigo').value = ''; 
+}
+
+function sortearAmigo() {
+    //Comprobar si la lista esta vacia
+    if(listaNombresAmigos.length === 0){
+        alert("No ha ingresado ningun amigo a la lista.");
+    }else{
+        let posicionAmigo = Math.floor(Math.random()*listaNombresAmigos.length);
+        let amigoSorteado = listaNombresAmigos[posicionAmigo];
+
+        let resultado = document.getElementById("resultado");
+        resultado.innerHTML = "";
+        let li = document.createElement("li");
+        li.textContent = "El amigo secreto es: "+amigoSorteado;
+        resultado.appendChild(li);
+        
+        document.getElementById("listaAmigos").innerHTML = "";
+    }
 }
